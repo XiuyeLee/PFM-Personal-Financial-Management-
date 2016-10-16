@@ -1,0 +1,14 @@
+{
+    "success": true,
+    "user": [{
+        "id": 1,
+        "name": "Philip J. Fry",
+        "posts": [{
+            "title": "Post 1"
+        },{
+            "title": "Post 2"
+        },{
+            "title": "Post 3"
+        }]
+    }]
+}
