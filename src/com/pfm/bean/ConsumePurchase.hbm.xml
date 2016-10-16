@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016-7-10 14:18:56 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-	<class name="com.pfm.entity.ConsumePurchase" table="CONSUME_PURCHASE">
+	<class name="com.pfm.bean.ConsumePurchase" table="CONSUME_PURCHASE">
 		<id name="uuid" type="string">
 			<column name="UUID" />
 			<generator class="uuid.hex" />

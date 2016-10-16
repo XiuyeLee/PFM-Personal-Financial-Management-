@@ -1,4 +1,4 @@
-package com.pfm.entity;
+package com.pfm.bean;
 
 public class Test {
 

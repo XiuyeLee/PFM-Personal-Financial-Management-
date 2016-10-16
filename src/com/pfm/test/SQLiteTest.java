@@ -10,9 +10,9 @@ import java.util.UUID;
 public class SQLiteTest {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		
+
 		Class.forName("org.sqlite.JDBC");
-		
+
 		Connection conn = DriverManager.getConnection("jdbc:sqlite:pfm.db");
 		Statement stmt = conn.createStatement();
 //		int rows = stmt.executeUpdate("INSERT INTO test (uuid,name) values('"+UUID.randomUUID().toString().replaceAll("-", "")+"','xiuye')");
@@ -28,7 +28,7 @@ public class SQLiteTest {
 		while(rs.next()){
 			System.out.println("name := "+rs.getString(1));
 		}
-		
+
 	}
-	
+
 }

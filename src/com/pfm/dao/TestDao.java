@@ -3,6 +3,7 @@ package com.pfm.dao;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -11,23 +12,24 @@ import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.pfm.entity.Test;
+import com.pfm.bean.Test;
 
 @Repository
 public class TestDao{
 
 	@Resource
 	private HibernateTemplate ht;
-	
+
 	@Resource
 	private SessionFactory sf;
-	
+
 	public void test(Test test){
 		//session save  起作用
 		ht.save(test);
-		
+		ht.flush();
+		System.out.println("test");
 	}
-	
+
 	public int save(Test test){
 		Session s = sf.openSession();
 		s.beginTransaction();
@@ -38,7 +40,7 @@ public class TestDao{
 		s.close();
 		return i;
 	}
-	
+
 	public List list(){
 		Session s = sf.openSession();
 		s.beginTransaction();
@@ -48,6 +50,6 @@ public class TestDao{
 		s.close();
 		return l;
 	}
-	
-	
+
+
 }

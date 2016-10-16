@@ -1,4 +1,4 @@
-package com.pfm.entity;
+package com.pfm.bean;
 
 import java.util.Date;
 

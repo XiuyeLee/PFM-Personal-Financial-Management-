@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.pfm.entity.ConsumePurchase;
+import com.pfm.bean.ConsumePurchase;
 
 
 @Repository

@@ -1,4 +1,4 @@
-package com.pfm.entity;
+package com.pfm.bean;
 /**
  * 
  * 支出分类:

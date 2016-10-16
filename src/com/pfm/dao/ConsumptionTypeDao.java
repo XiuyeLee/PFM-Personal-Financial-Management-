@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.pfm.entity.ConsumptionType;
+import com.pfm.bean.ConsumptionType;
 
 
 @Repository
