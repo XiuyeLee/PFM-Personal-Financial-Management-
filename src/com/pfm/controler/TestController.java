@@ -1,13 +1,8 @@
 package com.pfm.controler;
 
-import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.pfm.bean.Test;
 import com.pfm.dao.TestDao;
+import com.pfm.service.TestService;
 
 //@EnableWebMvc
 //@Configuration
@@ -22,8 +18,11 @@ import com.pfm.dao.TestDao;
 @Controller
 public class TestController {
 
+//	@Resource
+//	private TestDao testDao;
+
 	@Resource
-	private TestDao testDao;
+	private TestService testService;
 
 //	@Bean
 //	public Test test123() {
@@ -67,9 +66,9 @@ public class TestController {
 		if(test.getName() == null){
 			return "test2";
 		}
-		test.setUuid(UUID.randomUUID().toString().replaceAll("-", ""));
 		System.out.println("uuid := " + test.getUuid() + ",name := " + test.getName());
-		this.testDao.test(test);
+
+		this.testService.save(test);
 		return "test2";
 	}
 	@RequestMapping("test1.do")
