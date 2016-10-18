@@ -20,8 +20,7 @@
 	<!-- <util:properties location="" id=""></util:properties> -->
 
 	<!-- Spring + MyBatis -->
-	<bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
-		 destroy-method="close">
+	<bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 
 		<property name="driverClassName" value="org.sqlite.JDBC" />
 		<property name="url" value="jdbc:sqlite:pfm.db" />
