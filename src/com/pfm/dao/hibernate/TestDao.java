@@ -1,4 +1,4 @@
-package com.pfm.dao;
+package com.pfm.dao.hibernate;
 
 import java.util.List;
 
@@ -23,6 +23,7 @@ public class TestDao{
 	@Resource
 	private SessionFactory sf;
 
+	@Transactional
 	public void test(Test test){
 		//session save  起作用
 		ht.save(test);

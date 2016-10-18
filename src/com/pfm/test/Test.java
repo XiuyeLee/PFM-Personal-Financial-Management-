@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pfm.dao.TestDao;
+import com.pfm.dao.hibernate.TestDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
@@ -26,13 +26,13 @@ public class Test {
 		//fail("Not yet implemented");
 		assertNotNull(testDao);
 		com.pfm.bean.Test t = new com.pfm.bean.Test();
-		t.setName("rrrrrrr");
+		t.setName("fadfsd");
 		testDao.test(t);
 		List list = testDao.list();
-		for(Object o : list)
-		{
-			testDao.delete((com.pfm.bean.Test) o);
-		}
+//		for(Object o : list)
+//		{
+//			testDao.delete((com.pfm.bean.Test) o);
+//		}
 
 	}
 

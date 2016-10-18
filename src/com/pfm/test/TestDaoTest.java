@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.pfm.bean.Test;
-import com.pfm.dao.TestDao;
+import com.pfm.dao.hibernate.TestDao;
 
 public class TestDaoTest {
 

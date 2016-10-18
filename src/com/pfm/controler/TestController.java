@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.pfm.bean.Test;
-import com.pfm.dao.TestDao;
+import com.pfm.dao.hibernate.TestDao;
 import com.pfm.service.TestService;
 
 //@EnableWebMvc

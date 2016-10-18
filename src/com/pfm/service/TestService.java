@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.pfm.bean.Test;
-import com.pfm.dao.TestDao;
+import com.pfm.dao.hibernate.TestDao;
 
 @Service
 public class TestService {

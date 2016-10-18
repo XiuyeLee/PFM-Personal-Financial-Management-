@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.pfm.bean.ConsumptionType;
-import com.pfm.dao.ConsumptionTypeDao;
+import com.pfm.dao.hibernate.ConsumptionTypeDao;
 
 public class ConsumptionTypeDaoTest {
 

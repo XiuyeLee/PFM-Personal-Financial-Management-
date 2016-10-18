@@ -1,4 +1,4 @@
-package com.pfm.dao;
+package com.pfm.dao.hibernate;
 
 import java.util.List;
 
