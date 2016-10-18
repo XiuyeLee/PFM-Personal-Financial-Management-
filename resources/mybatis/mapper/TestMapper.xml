@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pfm.dao.mybatis.TestMapper">
+
+	<resultMap type="com.pfm.bean.Test" id="BaseResultMap">
+		<result property="uuid" column="UUID" javaType="string" />
+		<result property="name" column="NAME" javaType="string" />
+	</resultMap>
+
+	<sql id="BaseColumnList">
+		UUID,NAME
+	</sql>
+
+	<insert id="save" parameterType="com.pfm.bean.Test">
+		<!-- <selectKey keyProperty="uuid" keyColumn="UUID" order="BEFORE"> select
+			last_insert_rowid() </selectKey> -->
+		insert into TEST(
+		<include refid="BaseColumnList"></include>
+		)
+		values(#{uuid,javaType=STRING},#{name,javaType=STRING})
+	</insert>
+	<select id="findAll" resultMap="BaseResultMap">
+		select
+		<include refid="BaseColumnList"></include>
+		from TEST
+	</select>
+</mapper>

@@ -29,10 +29,10 @@ public class Test {
 		t.setName("fadfsd");
 		testDao.test(t);
 		List list = testDao.list();
-//		for(Object o : list)
-//		{
-//			testDao.delete((com.pfm.bean.Test) o);
-//		}
+		for(Object o : list)
+		{
+			testDao.delete((com.pfm.bean.Test) o);
+		}
 
 	}
 

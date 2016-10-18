@@ -1,6 +1,8 @@
 package com.pfm.controler;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -68,8 +70,20 @@ public class TestController {
 		}
 		System.out.println("uuid := " + test.getUuid() + ",name := " + test.getName());
 
-		this.testService.save(test);
+		//this.testService.save(test);
+		int i = this.testService.saveTest(test);
+		if(i>0){
+			System.out.println("inset := " + true);
+		}
+		else{
+			System.out.println("inset := " + false);
+		}
 		return "test2";
+	}
+	@RequestMapping("test3.do")
+	@ResponseBody
+	public List<Test> selectAll(){
+		return this.testService.list();
 	}
 	@RequestMapping("test1.do")
 	public String test1(Test test) {
