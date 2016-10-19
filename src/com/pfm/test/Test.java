@@ -31,7 +31,8 @@ public class Test {
 		List list = testDao.list();
 		for(Object o : list)
 		{
-			testDao.delete((com.pfm.bean.Test) o);
+			//testDao.delete((com.pfm.bean.Test) o);
+			System.out.println(o);
 		}
 
 	}

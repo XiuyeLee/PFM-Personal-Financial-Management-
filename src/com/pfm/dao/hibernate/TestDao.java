@@ -20,8 +20,7 @@ public class TestDao{
 	@Resource
 	private HibernateTemplate ht;
 
-	@Resource
-	private SessionFactory sf;
+
 
 	@Transactional
 	public void test(Test test){
@@ -35,24 +34,10 @@ public class TestDao{
 
 	public void save(Test test){
 		this.ht.save(test);
-//		Session s = sf.openSession();
-//		s.beginTransaction();
-//		//不知道为什么session save不起作用
-//		SQLQuery q = s.createSQLQuery("insert into test(uuid,name) values('"+test.getUuid()+"','"+test.getName()+"')");
-//		int i = q.executeUpdate();
-//		s.getTransaction().commit();
-//		s.close();
-//		return i;
 	}
 
 	public List list(){
-		Session s = sf.openSession();
-		s.beginTransaction();
-		Query q = s.createQuery("from Test");
-		List l = q.list();
-		s.getTransaction().commit();
-		s.close();
-		return l;
+		return ht.find("from Test");
 	}
 
 
