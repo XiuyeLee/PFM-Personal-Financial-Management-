@@ -16,6 +16,30 @@
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
+
+
+
+	<!-- it's for static resources mapping to location -->
+	<!-- <mvc:resources location="" mapping=""></mvc:resources> -->
+
+	<!-- <mvc:default-servlet-handler/> -->
+
+	<!-- <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/> -->
+
+	<!-- <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"
+		/> -->
+	<!-- 启用spring mvc 注解 -->
+	<!-- <context:annotation-config /> -->
+	<!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/ui/" p:suffix=".jsp" /> -->
+	<!-- 文件上传所用到的分解器 -->
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" /> <property name="maxUploadSize"
+		value="10485760000" /> <property name="maxInMemorySize" value="40960" />
+		</bean> -->
+
+
 	<!-- 使用手工配置的注解方式来注入bean -->
 	<!-- <context:annotation-config></context:annotation-config> -->
 	<!-- <util:properties location="" id=""></util:properties> -->
@@ -119,7 +143,14 @@
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.connection.autocommit">true</prop>
 				<prop key="hibernate.connection.characterEncoding">UTF-8</prop>
-
+				<!-- 缓存配置 -->
+				<prop key="cache.use_second_level_cache">true</prop><!-- 启用二级缓存 -->
+				<prop key="hibernate.cache.use_query_cache">true</prop><!-- 启用查询缓存 -->
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+				</prop>
+				<!-- 关闭Load方法的延迟加载 -->
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+				<prop key="hibernate.cache.provider_configuration_file_resource_path">config/xml/ehcache.xml</prop>
 			</props>
 
 		</property>
@@ -131,8 +162,7 @@
 			</list> </property> -->
 	</bean>
 
-	<!-- <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"
-		/> -->
+
 
 	<bean class="org.springframework.orm.hibernate4.HibernateTemplate"
 		id="hibernateTemplate">
@@ -166,12 +196,7 @@
 	<context:component-scan base-package="com.pfm"></context:component-scan>
 	<mvc:annotation-driven></mvc:annotation-driven>
 
-	<!-- it's for static resources mapping to location -->
-	<!-- <mvc:resources location="" mapping=""></mvc:resources> -->
 
-	<!-- <mvc:default-servlet-handler/> -->
-
-	<!-- <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/> -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/pages/"></property>

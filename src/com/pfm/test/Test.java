@@ -29,7 +29,7 @@ public class Test {
 	@Resource
 	private TestDao testDao;
 
-	@BeforeClass/*must bu static function*/
+	@BeforeClass/*must be static function*/
 	public static void config(){
 		PropertyConfigurator.configure("resources/config/properties/log4j.properties");
 	}
