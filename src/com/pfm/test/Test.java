@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.PropertyConfigurator;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,6 +28,11 @@ public class Test {
 
 	@Resource
 	private TestDao testDao;
+
+	@BeforeClass/*must bu static function*/
+	public static void config(){
+		PropertyConfigurator.configure("resources/config/properties/log4j.properties");
+	}
 
 	@org.junit.Test
 	public void test() {

@@ -165,6 +165,10 @@
 
 	<context:component-scan base-package="com.pfm"></context:component-scan>
 	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<!-- it's for static resources mapping to location -->
+	<!-- <mvc:resources location="" mapping=""></mvc:resources> -->
+
 	<!-- <mvc:default-servlet-handler/> -->
 
 	<!-- <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/> -->
