@@ -21,25 +21,28 @@
 	<!-- <util:properties location="" id=""></util:properties> -->
 
 	<!-- Spring + MyBatis -->
+	<util:properties location="classpath:config/properties/mybatis_jdbc.properties"
+		id="mybatis_jdbc"></util:properties>
+
 	<bean name="mybatisDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 
-		<property name="driverClassName" value="org.sqlite.JDBC" />
-		<property name="url" value="jdbc:sqlite:pfm.db" />
-		<property name="username" value="" />
-		<property name="password" value="" />
+		<property name="driverClassName" value="#{mybatis_jdbc.driverClassName}" />
+		<property name="url" value="#{mybatis_jdbc.url}" />
+		<property name="username" value="#{mybatis_jdbc.username}" />
+		<property name="password" value="#{mybatis_jdbc.password}" />
 		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="0" />
+		<property name="initialSize" value="#{mybatis_jdbc.initialSize}" />
 		<!-- 连接池最大使用连接数量 -->
-		<property name="maxTotal" value="20" />
+		<property name="maxTotal" value="#{mybatis_jdbc.maxTotal}" />
 		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="20" />
+		<property name="maxIdle" value="#{mybatis_jdbc.maxIdle}" />
 		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="0" />
+		<property name="minIdle" value="#{mybatis_jdbc.minIdle}" />
 		<!-- 获取连接最大等待时间 -->
 		<!-- <property name="maxWait" value="60000" /> -->
 		<!-- <property name="poolPreparedStatements" value="true" /> <property
 			name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
-		<!-- <property name="validationQuery" value="${validationQuery}" /> <property
+		<!-- <property name="validationQuery" value="#{validationQuery}" /> <property
 			name="testOnBorrow" value="false" /> <property name="testOnReturn" value="false"
 			/> <property name="testWhileIdle" value="true" /> -->
 		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
@@ -80,19 +83,24 @@
 
 
 	<!-- Spring + Hibernate -->
+	<util:properties
+		location="classpath:config/properties/hibernate_jdbc.properties" id="hibernate_jdbc"></util:properties>
+
+	<!-- <context:property-placeholder location="classpath:config/properties/hibernate_jdbc.properties"/> -->
+
 	<bean id="hibernateDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 
-		<property name="jdbcUrl" value="jdbc:sqlite:pfm.db"></property>
-		<property name="driverClass" value="org.sqlite.JDBC"></property>
-		<property name="user" value="xiuye"></property>
-		<property name="password" value="123456"></property>
-		<property name="initialPoolSize" value="0"></property>
-		<property name="maxPoolSize" value="10"></property>
-		<property name="minPoolSize" value="0"></property>
-		<property name="acquireIncrement" value="3"></property>
-		<property name="maxIdleTime" value="60"></property>
-		<!-- property name="autoCommitOnClose" value="true"></property> -->
+		<property name="jdbcUrl" value="#{hibernate_jdbc.jdbcUrl}"></property>
+		<property name="driverClass" value="#{hibernate_jdbc.driverClass}"></property>
+		<property name="user" value="#{hibernate_jdbc.user}"></property>
+		<property name="password" value="#{hibernate_jdbc.password}"></property>
+		<property name="initialPoolSize" value="#{hibernate_jdbc.initialPoolSize}"></property>
+		<property name="maxPoolSize" value="#{hibernate_jdbc.maxPoolSize}"></property>
+		<property name="minPoolSize" value="#{hibernate_jdbc.minPoolSize}"></property>
+		<property name="acquireIncrement" value="#{hibernate_jdbc.acquireIncrement}"></property>
+		<property name="maxIdleTime" value="#{hibernate_jdbc.maxIdleTime}"></property>
+		<!-- <property name="autoCommitOnClose" value="true"></property> -->
 
 
 	</bean>

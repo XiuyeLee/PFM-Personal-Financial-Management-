@@ -2,6 +2,7 @@ package com.pfm.test;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,14 +10,19 @@ import javax.annotation.Resource;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Log4jConfigurer;
+import org.springframework.web.util.Log4jWebConfigurer;
 
 import com.pfm.dao.hibernate.TestDao;
 
+@SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
 	"classpath:config/xml/applicationContext.xml"
 })
 public class Test {
+
+
 
 	@Resource
 	private TestDao testDao;
