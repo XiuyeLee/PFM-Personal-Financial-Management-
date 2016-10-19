@@ -65,6 +65,8 @@ public class TestController {
 
 	@RequestMapping("test2.do")
 	public String test(Test test) {
+		System.out.println("Project's Path := "+System.getProperty("web.root"));
+
 		if(test.getName() == null){
 			return "test2";
 		}

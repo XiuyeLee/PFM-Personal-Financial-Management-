@@ -14,7 +14,7 @@ import com.pfm.dao.hibernate.TestDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
-	"classpath:applicationContext.xml"
+	"classpath:config/xml/applicationContext.xml"
 })
 public class Test {
 
@@ -29,6 +29,7 @@ public class Test {
 		t.setName("fadfsd");
 		testDao.test(t);
 		List list = testDao.list();
+		System.out.println(list.size());
 		for(Object o : list)
 		{
 			//testDao.delete((com.pfm.bean.Test) o);
