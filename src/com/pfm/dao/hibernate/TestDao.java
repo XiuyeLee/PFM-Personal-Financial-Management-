@@ -27,7 +27,7 @@ public class TestDao{
 		//session save  起作用
 		ht.save(test);
 	}
-	public void delete(Test test){
+	public void delete(Object test){
 		//session save  起作用
 		ht.delete(test);
 	}

@@ -93,6 +93,11 @@ public class TestController {
 		return "test1";
 	}
 
+	@RequestMapping("deleteAllTest.do")
+	public void delete(){
+		this.testService.deleteAll();
+	}
+	
 //	@Resource
 //	private Test test;
 //

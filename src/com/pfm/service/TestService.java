@@ -37,4 +37,13 @@ public class TestService {
 
 	}
 
+	public void deleteAll() {
+
+		List list = testDao.list();
+		for(Object o : list){
+			this.testDao.delete(o);
+		}
+
+	}
+
 }
