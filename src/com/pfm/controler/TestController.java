@@ -8,11 +8,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.pfm.bean.Test;
-import com.pfm.dao.hibernate.TestDao;
 import com.pfm.service.TestService;
+import com.pfm.util.SpeechUtil;
+import com.xiuye.speech.Speech;
 
 //@EnableWebMvc
 //@Configuration
@@ -60,6 +60,7 @@ public class TestController {
 
 	@RequestMapping("mvc.do")
 	public String mvc() {
+		SpeechUtil.speakOnce("打死小日本草你妈!");
 		return "mvc";
 	}
 
@@ -97,7 +98,7 @@ public class TestController {
 	public void delete(){
 		this.testService.deleteAll();
 	}
-	
+
 //	@Resource
 //	private Test test;
 //
