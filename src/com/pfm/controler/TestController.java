@@ -60,14 +60,14 @@ public class TestController {
 
 	@RequestMapping("mvc.do")
 	public String mvc() {
-		SpeechUtil.speakOnce("打死小日本草你妈!");
+		SpeechUtil.speakOnce("您打开了mvc.do!");
 		return "mvc";
 	}
 
 	@RequestMapping("test2.do")
 	public String test(Test test) {
 		System.out.println("Project's Path := "+System.getProperty("web.root"));
-
+		SpeechUtil.speakOnce("您需要输入信息!");
 		if(test.getName() == null){
 			return "test2";
 		}
@@ -86,11 +86,12 @@ public class TestController {
 	@RequestMapping("test3.do")
 	@ResponseBody
 	public List<Test> selectAll(){
+		SpeechUtil.speakOnce("您正在下载JSON数据!");
 		return this.testService.list();
 	}
 	@RequestMapping("test1.do")
 	public String test1(Test test) {
-
+		SpeechUtil.speakOnce("您打开了test1.");
 		return "test1";
 	}
 
