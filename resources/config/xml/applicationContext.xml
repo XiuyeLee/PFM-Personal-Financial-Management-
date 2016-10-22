@@ -1,0 +1,206 @@
+<beans default-lazy-init="true"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+    http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+
+
+
+	<!-- it's for static resources mapping to location -->
+	<!-- <mvc:resources location="" mapping=""></mvc:resources> -->
+
+	<!-- <mvc:default-servlet-handler/> -->
+
+	<!-- <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/> -->
+
+	<!-- <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"
+		/> -->
+	<!-- 启用spring mvc 注解 -->
+	<!-- <context:annotation-config /> -->
+	<!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/ui/" p:suffix=".jsp" /> -->
+	<!-- 文件上传所用到的分解器 -->
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" /> <property name="maxUploadSize"
+		value="10485760000" /> <property name="maxInMemorySize" value="40960" />
+		</bean> -->
+
+
+	<!-- 使用手工配置的注解方式来注入bean -->
+	<!-- <context:annotation-config></context:annotation-config> -->
+	<!-- <util:properties location="" id=""></util:properties> -->
+
+	<!-- Spring + MyBatis -->
+	<util:properties location="classpath:config/properties/mybatis_jdbc.properties"
+		id="mybatis_jdbc"></util:properties>
+
+	<bean name="mybatisDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+
+		<property name="driverClassName" value="#{mybatis_jdbc.driverClassName}" />
+		<property name="url" value="#{mybatis_jdbc.url}" />
+		<property name="username" value="#{mybatis_jdbc.username}" />
+		<property name="password" value="#{mybatis_jdbc.password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="#{mybatis_jdbc.initialSize}" />
+		<!-- 连接池最大使用连接数量 -->
+		<property name="maxTotal" value="#{mybatis_jdbc.maxTotal}" />
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="#{mybatis_jdbc.maxIdle}" />
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="#{mybatis_jdbc.minIdle}" />
+		<!-- 获取连接最大等待时间 -->
+		<!-- <property name="maxWait" value="60000" /> -->
+		<!-- <property name="poolPreparedStatements" value="true" /> <property
+			name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
+		<!-- <property name="validationQuery" value="#{validationQuery}" /> <property
+			name="testOnBorrow" value="false" /> <property name="testOnReturn" value="false"
+			/> <property name="testWhileIdle" value="true" /> -->
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<!-- <property name="timeBetweenEvictionRunsMillis" value="60000" /> -->		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<!-- <property name="minEvictableIdleTimeMillis" value="25200000" /> -->
+		<!-- 打开removeAbandoned功能 -->
+		<!-- <property name="removeAbandoned" value="true" /> -->
+		<!-- 1800秒，也就是30分钟 -->
+		<!-- <property name="removeAbandonedTimeout" value="1800" /> -->
+		<!-- 关闭abanded连接时输出错误日志 -->
+		<!-- <property name="logAbandoned" value="true" /> -->
+		<!-- 监控数据库 -->
+		<!-- <property name="filters" value="stat" /> -->
+		<!-- <property name="filters" value="mergeStat" /> -->
+	</bean>
+
+	<bean id="mybatisSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="mybatisDataSource" />
+		<!-- <property name="configLocation" value="classpath:sqlMapConfig.xml"
+			/> -->
+		<!-- 自动扫描mapping.xml文件，**表示迭代查找,也可在sqlMapConfig.xml中单独指定xml文件 -->
+		<property name="mapperLocations" value="classpath:mybatis/mapper/*.xml" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.pfm.dao.mybatis" />
+		<property name="sqlSessionFactoryBeanName" value="mybatisSqlSessionFactory" />
+	</bean>
+
+	<bean id="mybatisDataSourcetransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mybatisDataSource" />
+	</bean>
+
+	<!-- 配置使用注解的方式来使用事务 -->
+	<tx:annotation-driven mode="proxy"
+		proxy-target-class="true" transaction-manager="mybatisDataSourcetransactionManager" />
+
+
+
+	<!-- Spring + Hibernate -->
+	<util:properties
+		location="classpath:config/properties/hibernate_jdbc.properties" id="hibernate_jdbc"></util:properties>
+
+	<!-- <context:property-placeholder location="classpath:config/properties/hibernate_jdbc.properties"/> -->
+
+	<bean id="hibernateDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+
+		<property name="jdbcUrl" value="#{hibernate_jdbc.jdbcUrl}"></property>
+		<property name="driverClass" value="#{hibernate_jdbc.driverClass}"></property>
+		<property name="user" value="#{hibernate_jdbc.user}"></property>
+		<property name="password" value="#{hibernate_jdbc.password}"></property>
+		<property name="initialPoolSize" value="#{hibernate_jdbc.initialPoolSize}"></property>
+		<property name="maxPoolSize" value="#{hibernate_jdbc.maxPoolSize}"></property>
+		<property name="minPoolSize" value="#{hibernate_jdbc.minPoolSize}"></property>
+		<property name="acquireIncrement" value="#{hibernate_jdbc.acquireIncrement}"></property>
+		<property name="maxIdleTime" value="#{hibernate_jdbc.maxIdleTime}"></property>
+		<!-- <property name="autoCommitOnClose" value="true"></property> -->
+
+
+	</bean>
+	<bean id="hibernateLocalSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="hibernateDataSource"></property>
+		<property name="hibernateProperties">
+
+			<props>
+
+				<prop key="hibernate.dialect">
+					com.pfm.db.dialect.SQLiteDialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+				<!-- 缓存配置 -->
+				<prop key="cache.use_second_level_cache">true</prop><!-- 启用二级缓存 -->
+				<prop key="hibernate.cache.use_query_cache">true</prop><!-- 启用查询缓存 -->
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+				</prop>
+				<!-- 关闭Load方法的延迟加载 -->
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+				<prop key="hibernate.cache.provider_configuration_file_resource_path">config/xml/ehcache.xml</prop>
+			</props>
+
+		</property>
+		<!-- 必须写classpath否则报错 -->
+		<property name="mappingLocations" value="classpath:hibernate/mapping/*.hbm.xml"></property>
+
+		<!-- <property name="mappingResources"> <list> <value>com/pfm/bean/Test.hbm.xml</value>
+			<value>com/pfm/bean/ConsumptionType.hbm.xml</value> <value>com/pfm/bean/ConsumePurchase.hbm.xml</value>
+			</list> </property> -->
+	</bean>
+
+
+
+	<bean class="org.springframework.orm.hibernate4.HibernateTemplate"
+		id="hibernateTemplate">
+		<property name="sessionFactory" ref="hibernateLocalSessionFactory"></property>
+	</bean>
+	<bean id="hibernateTransactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibernateLocalSessionFactory"></property>
+	</bean>
+
+
+	<tx:advice id="hibernateTxAdvice" transaction-manager="hibernateTransactionManager">
+		<tx:attributes>
+			<!-- dao 中有什么方法，那么要使用hibernate的HibernateTemplate功能或其他，那么dao中方法必须在此声明啊，否则报错 -->
+			<tx:method name="test*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="execute*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config proxy-target-class="true" expose-proxy="true">
+		<aop:advisor advice-ref="hibernateTxAdvice" pointcut="within(com.pfm.dao.hibernate.*)" />
+	</aop:config>
+
+
+	<context:component-scan base-package="com.pfm"></context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/"></property>
+		<property name="suffix" value=".html"></property>
+	</bean>
+
+</beans>
