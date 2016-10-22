@@ -10,9 +10,6 @@ package com.pfm.bean;
  */
 public class ConsumptionType {
 
-	public ConsumptionType() {
-		
-	}
 	private int id;
 
 	private String type;
@@ -41,8 +38,5 @@ public class ConsumptionType {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	
-
 
 }
