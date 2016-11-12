@@ -14,7 +14,7 @@ import com.demo.config.aspect.TrackCounter;
 
 @Configuration
 @EnableAspectJAutoProxy(proxyTargetClass=true)
-@ComponentScan({ "com.demo.config.aspect" })
+@ComponentScan({ "com.demo.config.aspect" })//不起作用的
 // @ImportResource("classpath:config/xml/applicationContext.xml")
 public class TrackCounterConfig {
 
