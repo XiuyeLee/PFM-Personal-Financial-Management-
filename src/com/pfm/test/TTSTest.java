@@ -7,6 +7,7 @@ public class TTSTest {
 	public static void main(String[] args) {
 
 		//TTSHelper.speakOnce("Hello world!");
+		//not thread safe
 		Thread t = new Thread(){
 			@Override
 			public void run() {
