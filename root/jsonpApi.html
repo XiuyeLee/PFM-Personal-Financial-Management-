@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ios Message</title>
+<script type="text/javascript" src="js/jsonp.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		function f(response) {
+			ret = response;
+			console.log("success := " + ret);
+			console.log("success := " + JSON.stringify(ret));
+			console.log("end");
+		}
+		var data = {
+			"page" : "1",
+			"pageSize" : "20",
+			"searchCondition" : {}
+		};
+		jsonpCallback("iosAlertListBySearch", "GET",
+				"http://www.xiuye.com/josnp.do", data, f);
+	</script>
+</body>
+</html>
