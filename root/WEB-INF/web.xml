@@ -21,7 +21,7 @@
 	<!-- It's just for log4j.properties config's path to be set -->
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
-		<param-value>classpath:config/properties/log4j.properties</param-value>
+		<param-value>classpath:log4j.properties</param-value>
 	</context-param>
 
 	<context-param>
