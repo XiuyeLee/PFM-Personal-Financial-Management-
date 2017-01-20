@@ -17,7 +17,7 @@ import com.xiuye.jsonp.callback.AbstractJsonpCallback;
 public class JsonpCallbackDemo extends AbstractJsonpCallback {
 
 	@Resource
-	private TestMapper testDao;
+	private TestMapper testMapper;
 
 	public String test1(){
 		return "{msg : 'json no parameter'}";
@@ -28,6 +28,12 @@ public class JsonpCallbackDemo extends AbstractJsonpCallback {
 	 * @return
 	 */
 	public String test2(Map<String,String[]> map){
+		System.out.println("test2 executing!");
+		System.out.println("test2 executing!");
+		System.out.println("test2 executing!");
+		System.out.println("test2 executing!");
+		System.out.println("test2 executing!");
+		System.out.println("test2 executing!");
 		System.out.println("jsonp parameter := " + map);
 		return "{msg : 'json have parameter'}";
 
@@ -35,7 +41,7 @@ public class JsonpCallbackDemo extends AbstractJsonpCallback {
 
 	public String test3(){
 
-		List<Test> list = this.testDao.findAll();
+		List<Test> list = this.testMapper.findAll();
 		JSONArray object = JSONArray.fromObject(list);
 
 		return object.toString();

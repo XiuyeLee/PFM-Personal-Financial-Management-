@@ -9,7 +9,7 @@ function jsonpCallback(callback, t, u, d,f) {
 		success : f,
 		error : function(e) {
 			console.log("error := " + e.status + ',' + e.statusText);
-			throw new error("jsonp callback error");
+			throw new Error("jsonp callback error");
 		}
 	});
 

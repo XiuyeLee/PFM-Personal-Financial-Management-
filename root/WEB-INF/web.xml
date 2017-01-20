@@ -32,7 +32,7 @@
 	<!-- it's just for class org.springframework.web.context.ContextLoaderListener -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:config/xml/applicationContext.xml</param-value>
+		<param-value>classpath:config/xml/spring-jsonp-callbackmapper.xml,classpath:config/xml/applicationContext.xml</param-value>
 	</context-param>
 
 	<listener>
@@ -84,7 +84,7 @@
 		<!-- it's just for springDispatcher -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:config/xml/applicationContext.xml</param-value>
+			<param-value>classpath:config/xml/spring-jsonp-callbackmapper.xml,classpath:config/xml/applicationContext.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
